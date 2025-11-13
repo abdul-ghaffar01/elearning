@@ -1,5 +1,5 @@
 import FeaturedTutorials from '@/components/FeaturedTutorials'
-import LandingPage from '@/components/LandinPage'
+import LandingPage from '@/components/LandingPage'
 import React from 'react'
 
 const page = () => {

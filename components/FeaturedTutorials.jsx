@@ -31,64 +31,76 @@ const tutorials = [
 
 const fadeUp = (delay = 0) => ({
   hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { delay, duration: 0.6, ease: "easeOut" },
-  },
+  visible: { opacity: 1, y: 0, transition: { delay, duration: 0.6, ease: "easeOut" } },
 });
 
 export default function FeaturedTutorials() {
   const { isLoggedIn, login } = useUserStore();
 
   return (
-    <section className="relative z-10 max-w-7xl mx-auto px-6 py-24">
+    <section className="max-w-5xl mx-auto px-6 py-24">
       <motion.h2
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7 }}
-        className="text-4xl md:text-5xl font-bold text-center mb-12 text-[var(--foreground)]"
+        transition={{ duration: 0.8 }}
+        className="text-4xl md:text-5xl font-bold text-center mb-16 text-[var(--foreground)]"
       >
         Featured Tutorials
       </motion.h2>
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <motion.div
+        className="grid md:grid-cols-2 gap-10"
+        initial="hidden"
+        animate="visible"
+        variants={{
+          hidden: {},
+          visible: { transition: { staggerChildren: 0.15 } },
+        }}
+      >
         {tutorials.map((tut, i) => (
           <motion.div
             key={tut.id}
             variants={fadeUp(0.2 * i)}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="glass p-6 rounded-3xl shadow-lg hover:scale-105 transition-transform cursor-pointer flex flex-col justify-between"
+            className="relative rounded-3xl p-8 bg-[var(--card-bg)] glass border-2 border-transparent hover:shadow-lg transition-transform hover:scale-105"
+            style={{
+              borderImageSlice: 1,
+              borderWidth: "2px",
+              borderImageSource: "linear-gradient(45deg, #6366f1, #f472b6, #4ade80, #facc15)",
+            }}
           >
-            <div>
-              <h3 className="text-xl font-semibold mb-2 text-[var(--accent)]">{tut.title}</h3>
-              <p className="text-[var(--color-muted)] mb-4">{tut.desc}</p>
-              <span className="inline-block px-3 py-1 rounded-full text-sm font-medium bg-[var(--accent)]/20 text-[var(--accent)]">
-                {tut.level}
-              </span>
-            </div>
+            <div className="flex flex-col justify-between h-full">
+              <div>
+                <h3 className="text-2xl font-bold mb-3 text-[var(--accent)]">{tut.title}</h3>
+                <p className="text-[var(--color-muted)] mb-4">{tut.desc}</p>
+                <span className="inline-block px-3 py-1 rounded-full text-sm font-medium bg-[var(--accent)]/20 text-[var(--accent)]">
+                  {tut.level}
+                </span>
+              </div>
 
-            <div className="mt-6">
-              {isLoggedIn ? (
-                <button
-                  className="w-full py-2 rounded-xl bg-[var(--accent)] text-white font-medium shadow-md hover:shadow-lg transition"
-                >
-                  Enroll Now
-                </button>
-              ) : (
-                <button
-                  className="w-full py-2 rounded-xl bg-[var(--accent)]/80 text-white font-medium shadow-md hover:shadow-lg transition"
-                  onClick={() => login({ name: "Demo User" })}
-                >
-                  Login to Enroll
-                </button>
-              )}
+              <div className="mt-6">
+                {isLoggedIn ? (
+                  <motion.button
+                    whileHover={{ scale: 1.03, boxShadow: "0 0 12px var(--accent)" }}
+                    whileTap={{ scale: 0.97 }}
+                    className="w-full py-3 rounded-xl bg-[var(--accent)] text-white font-medium shadow-md transition"
+                  >
+                    Enroll Now
+                  </motion.button>
+                ) : (
+                  <motion.button
+                    whileHover={{ scale: 1.03, boxShadow: "0 0 12px var(--accent)" }}
+                    whileTap={{ scale: 0.97 }}
+                    onClick={() => login({ name: "Demo User" })}
+                    className="w-full py-3 rounded-xl bg-[var(--accent)]/80 text-white font-medium shadow-md transition"
+                  >
+                    Login to Enroll
+                  </motion.button>
+                )}
+              </div>
             </div>
           </motion.div>
         ))}
-      </div>
+      </motion.div>
     </section>
   );
 }
