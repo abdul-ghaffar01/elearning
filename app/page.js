@@ -1,3 +1,4 @@
+import FeaturedTutorials from '@/components/FeaturedTutorials'
 import LandingPage from '@/components/LandinPage'
 import React from 'react'
 
@@ -5,6 +6,7 @@ const page = () => {
   return (
     <div>
       <LandingPage />
+      <FeaturedTutorials />
     </div>
   )
 }
