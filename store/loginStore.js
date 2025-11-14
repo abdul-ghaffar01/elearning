@@ -6,6 +6,7 @@ export const useUserStore = create((set) => ({
         name: "John Doe",
         email: "john.doe@example.com",
         avatar: "/default-avatar.png", // could be a URL to a profile picture
+        role: "student", // or "student"
         enrolledTutorials: [
             {
                 id: 1,
