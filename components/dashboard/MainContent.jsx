@@ -5,7 +5,7 @@ import Profile from "./tabs/Profile";
 
 export default function MainContent({ activeTab }) {
   return (
-    <div className="p-2 w-full h-full">
+    <div className="w-full h-full overflow-y-auto scrollbar-hide">
       {activeTab === "enrolled" && <EnrolledTutorials />}
       {activeTab === "all" && <AllTutorials />}
       {activeTab === "profile" && <Profile />}

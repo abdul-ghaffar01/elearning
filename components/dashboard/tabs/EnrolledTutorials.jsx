@@ -3,8 +3,8 @@ import Link from "next/link";
 import { useUserStore } from "@/store/loginStore";
 
 const enrolledTutorials = [
-  { id: 1, title: "Introduction to Databases", thumbnail: "/images/db_tutorial.jpg", progress: 3/7 },
-  { id: 2, title: "Advanced SQL Queries", thumbnail: "/images/sql_tutorial.jpg", progress: 2/4 },
+  { id: 1, title: "Introduction to Databases", thumbnail: "/images/db_tutorial.jpg", passed: 3, total: 7 },
+  { id: 2, title: "Advanced SQL Queries", thumbnail: "/images/sql_tutorial.jpg", passed: 2, total: 4 },
 ];
 
 export default function EnrolledTutorials() {
@@ -12,7 +12,7 @@ export default function EnrolledTutorials() {
   if (!user) return <p className="p-10 text-[var(--foreground)]">Please login first.</p>;
 
   return (
-    <div className="w-full h-full p-6 flex flex-col gap-6">
+    <div className="w-full h-full p-6 flex flex-col gap-6 bg-transparent">
       <h1 className="text-3xl font-bold text-[var(--accent)]">Your Enrolled Tutorials</h1>
 
       <div className="grid md:grid-cols-2 gap-6">
@@ -30,7 +30,7 @@ export default function EnrolledTutorials() {
             <div className="p-4">
               <h2 className="text-lg font-bold text-[var(--accent)]">{tutorial.title}</h2>
               <p className="text-sm text-[var(--muted)] mt-2">
-                Progress: {tutorial.progress} lessons passed
+                Progress: {tutorial.passed} lessons passed out of {tutorial.total}
               </p>
               <div className="w-full h-2 bg-[var(--muted)] rounded-full mt-1">
                 <div

@@ -10,11 +10,11 @@ const tabs = [
 ];
 
 export default function Sidebar({ activeTab, setActiveTab }) {
-    const [collapsed, setCollapsed] = useState(true);
+    const [collapsed, setCollapsed] = useState(false);
 
     return (
         <div
-            className={`min-h-[calc(100dvh-70px)] bg-[var(--card-bg)] border-r border-[var(--border-color)] shadow-md p-4 flex flex-col transition-all duration-300
+            className={`min-h-[calc(100dvh-70px)] bg-[var(--card-bg)] border-r border-[var(--border-color)] shadow-md p-4 flex flex-col transition-all duration-300 overflow-y-auto
         ${collapsed ? "w-20" : "w-[300px]"}`}
         >
             {/* Collapse Button */}
