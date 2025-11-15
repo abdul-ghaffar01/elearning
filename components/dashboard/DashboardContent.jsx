@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import Sidebar from "./Sidebar";
 import MainContent from "./MainContent";
 import { useUserStore } from "@/store/loginStore";
@@ -10,17 +10,17 @@ export default function DashboardContent() {
     const user = useUserStore().user;
     const searchParams = useSearchParams();
     const router = useRouter();
-    
+
     // Check for tab in URL query params
     const tabFromParams = searchParams.get("tab");
-    
+
     // Allowed tabs for both roles
     const studentTabs = ["enrolled", "all", "certificates", "profile"];
     const instructorTabs = ["my_tutorials", "create_tutorial", "students", "analytics", "profile"];
 
     useEffect(() => {
         if (!user?.role) return;
-        
+
         // Priority 1: Use tab from URL params if valid
         if (tabFromParams) {
             const allowedTabs = user.role === "student" ? studentTabs : instructorTabs;
@@ -47,7 +47,7 @@ export default function DashboardContent() {
         if (!activeTab || !user?.role) return;
 
         const params = new URLSearchParams(searchParams);
-        
+
         // Only update URL if it's different from current
         if (params.get("tab") !== activeTab) {
             params.set("tab", activeTab);
@@ -56,18 +56,20 @@ export default function DashboardContent() {
     }, [activeTab, user]);
 
     return (
-        <div className="flex fixed h-[calc(100dvh-72px)] w-full">
-            {/* Sidebar */}
-            <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} user={user} />
+        <Suspense fallback={<div>Loading dashboard...</div>}>
+            <div className="flex fixed h-[calc(100dvh-72px)] w-full">
+                {/* Sidebar */}
+                <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} user={user} />
 
-            {/* Main Content */}
-            <div className="flex-1 h-full">
-                <MainContent
-                    activeTab={activeTab}
-                    setActiveTab={setActiveTab}
-                    role={user?.role}
-                />
+                {/* Main Content */}
+                <div className="flex-1 h-full">
+                    <MainContent
+                        activeTab={activeTab}
+                        setActiveTab={setActiveTab}
+                        role={user?.role}
+                    />
+                </div>
             </div>
-        </div>
+        </Suspense>
     );
 }
