@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { useState, useRef, useEffect } from "react";
 import { FaEllipsisH, FaEdit, FaTrash, FaUsers, FaEye, FaPlus, FaChartLine, FaCalendar, FaGlobe } from "react-icons/fa";
 
@@ -100,7 +101,8 @@ export default function MyTutorials({ setActiveTab }) {
             {/* Tutorials Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
                 {dummyTutorials.map((tutorial) => (
-                    <div
+                    <Link
+                        href={ `/u/manage/${tutorial.id}` }
                         key={tutorial.id}
                         className="bg-[var(--card-bg)] relative border border-[var(--border-color)] rounded-2xl shadow-sm hover:shadow-2xl transition-all duration-300 overflow-hidden flex flex-col group hover:border-[var(--accent)]/30"
                     >
@@ -112,15 +114,14 @@ export default function MyTutorials({ setActiveTab }) {
                                 alt="tutorial thumbnail"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                            
+
                             {/* Status Badge on Thumbnail */}
                             <div className="absolute top-3 left-3">
                                 <span
                                     className={`px-3 py-1 text-xs rounded-full font-medium backdrop-blur-sm
-                                        ${
-                                            tutorial.status === "published"
-                                                ? "bg-green-500/90 text-white"
-                                                : "bg-yellow-500/90 text-white"
+                                        ${tutorial.status === "published"
+                                            ? "bg-green-500/90 text-white"
+                                            : "bg-yellow-500/90 text-white"
                                         }`}
                                 >
                                     {tutorial.status.toUpperCase()}
@@ -200,7 +201,7 @@ export default function MyTutorials({ setActiveTab }) {
                                 <MenuItem danger icon={<FaTrash />} text="Delete Tutorial" />
                             </div>
                         )}
-                    </div>
+                    </Link>
                 ))}
             </div>
 
@@ -228,10 +229,9 @@ function MenuItem({ icon, text, danger }) {
     return (
         <button
             className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm transition-all duration-200
-                ${
-                    danger
-                        ? "text-red-500 hover:bg-red-500/10 hover:scale-105"
-                        : "hover:bg-[var(--accent)]/10 hover:scale-105"
+                ${danger
+                    ? "text-red-500 hover:bg-red-500/10 hover:scale-105"
+                    : "hover:bg-[var(--accent)]/10 hover:scale-105"
                 }
             `}
         >

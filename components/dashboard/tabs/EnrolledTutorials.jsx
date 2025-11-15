@@ -158,7 +158,7 @@ export default function EnrolledTutorials() {
                 whileTap={{ scale: 0.98 }}
               >
                 <Link
-                  href={`/dashboard/learning/${tutorial.id}`}
+                  href={`/u/dashboard/learning/${tutorial.id}`}
                   className="block glass rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 border border-[var(--border-color)] group"
                 >
                   {/* Thumbnail with Overlay */}

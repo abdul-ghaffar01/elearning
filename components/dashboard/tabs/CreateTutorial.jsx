@@ -1,7 +1,6 @@
 "use client";
 import React, { useState } from 'react';
 
-// icons.js
 import {
     Plus,
     Upload,

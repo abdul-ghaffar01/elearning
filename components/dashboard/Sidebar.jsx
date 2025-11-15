@@ -159,7 +159,7 @@ function DesktopSidebar({
                     onClick={() => setCollapsed(!collapsed)}
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
-                    className={`p-2 rounded-lg bg-[var(--card-bg)] border border-[var(--border-color)] hover:bg-[var(--accent)] transition-colors text-[var(--accent)] flex-shrink-0
+                    className={`p-2 rounded-lg bg-[var(--card-bg)] border border-[var(--border-color)] hover:bg-[var(--accent)]/10 transition-colors text-[var(--accent)] flex-shrink-0
                         ${collapsed ? 'top-4 right-4' : ''}`}
                 >
                     {collapsed ? (<FaBars />) : <FaChevronLeft />}
