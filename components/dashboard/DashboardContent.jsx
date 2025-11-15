@@ -56,7 +56,6 @@ export default function DashboardContent() {
     }, [activeTab, user]);
 
     return (
-        <Suspense fallback={<div>Loading dashboard ...</div>}>
             <div className="flex fixed h-[calc(100dvh-72px)] w-full">
                 {/* Sidebar */}
                 <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} user={user} />
@@ -70,6 +69,5 @@ export default function DashboardContent() {
                     />
                 </div>
             </div>
-        </Suspense>
     );
 }
