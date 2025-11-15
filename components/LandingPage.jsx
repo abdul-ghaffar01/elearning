@@ -73,13 +73,13 @@ export default function LandingPage() {
               >
                 Explore Tutorials
               </Link>
-              <button
-                onClick={logout}
+              <Link
+                href="/dashboard"
                 className="px-6 py-3 rounded-xl font-medium text-white shadow-lg"
                 style={{ backgroundColor: "var(--accent)" }}
               >
-                Logout
-              </button>
+                Dashboard
+              </Link>
             </div>
           </motion.div>
         )}
