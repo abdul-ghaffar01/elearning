@@ -5,8 +5,8 @@
   /* Light mode (purplish gray, glass UI) */
   --background: #f4f2f8;          /* light gray-purple */
   --foreground: #1b1a1e;          /* deep neutral text */
-  --card-bg: rgba(255, 255, 255, 0.6); /* translucent white card for glass effect */
-  --accent: #8b5cf6;              /* purple-500 */
+  --card-bg: rgba(255, 255, 255, 0.95); /* translucent white card for glass effect */
+  --accent: #6236c7;              /* purple-500 */
   --accent-hover: #7c3aed;        /* purple-600 */
   --muted: #a1a1aa;               /* zinc-400 */
   --border-color: rgba(255, 255, 255, 0.25);
@@ -21,7 +21,7 @@
   :root {
     --background: #141217;         /* dark purplish gray */
     --foreground: #e5e1f3;         /* soft light purple text */
-    --card-bg: rgba(30, 28, 38, 0.6); /* translucent dark card */
+    --card-bg: rgba(30, 28, 38, 0.95); /* translucent dark card */
     --accent: #a78bfa;             /* lighter purple accent */
     --accent-hover: #c4b5fd;       /* soft glow hover */
     --muted: #8b8b95;              /* cool muted gray */
@@ -173,8 +173,8 @@ html {
 /* ===== Glass UI Utilities ===== */
 .glass {
   background: var(--card-bg);
-  backdrop-filter: blur(16px) saturate(180%);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  backdrop-filter: blur(4px) saturate(180%);
+  -webkit-backdrop-filter: blur(4px) saturate(180%);
   border-radius: 1rem;
   border: 1px solid var(--border-color);
   box-shadow: 0 4px 24px var(--shadow-color);

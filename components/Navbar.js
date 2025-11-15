@@ -5,6 +5,7 @@ import Link from "next/link";
 import { FiMenu, FiX, FiLogIn, FiLogOut, FiUser, FiSettings } from "react-icons/fi";
 import { useUserStore } from "@/store/loginStore";
 import dynamic from "next/dynamic";
+import { useRouter } from "next/navigation";
 
 const FiMoon = dynamic(() => import("react-icons/fi").then((mod) => mod.FiMoon), {
   ssr: false,
@@ -17,7 +18,7 @@ const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const { isLoggedIn, user, login, logout } = useUserStore();
-
+  const router = useRouter();
   const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
@@ -31,11 +32,11 @@ const Navbar = () => {
     if (dark) {
       document.documentElement.style.setProperty("--background", "#141217");
       document.documentElement.style.setProperty("--foreground", "#e5e1f3");
-      document.documentElement.style.setProperty("--card-bg", "rgba(30, 28, 38, 0.6)");
+      document.documentElement.style.setProperty("--card-bg", "rgba(30, 28, 38, 0.98)");
     } else {
       document.documentElement.style.setProperty("--background", "#f4f2f8");
       document.documentElement.style.setProperty("--foreground", "#1b1a1e");
-      document.documentElement.style.setProperty("--card-bg", "rgba(255, 255, 255, 0.6)");
+      document.documentElement.style.setProperty("--card-bg", "rgba(255, 255, 255, 0.98)");
     }
   };
 
@@ -46,11 +47,7 @@ const Navbar = () => {
   };
 
   const handleLogin = () => {
-    login({ 
-      name: "Demo User", 
-      email: "demo@example.com",
-      role: "student" // or "instructor" based on your logic
-    });
+    router.push("/login");
     setMenuOpen(false);
   };
 
@@ -81,7 +78,7 @@ const Navbar = () => {
             <Link
               key={link}
               href={`/${link.toLowerCase()}`}
-              className="hover-glow transition font-medium px-3 py-2 rounded-lg hover:bg-[var(--accent)]/10"
+              className="hover-glow transition font-medium px-3 py-2 rounded-lg hover:bg-[var(--accent)]/30"
             >
               {link}
             </Link>
@@ -115,7 +112,7 @@ const Navbar = () => {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => setUserMenuOpen(!userMenuOpen)}
-                  className="px-4 py-2 rounded-lg font-medium flex items-center gap-2 border border-[var(--accent)] hover:bg-[var(--accent)]/10 transition"
+                  className="px-4 py-2 rounded-lg font-medium flex items-center gap-2 border border-[var(--accent)] hover:bg-[var(--accent)]/30 transition"
                 >
                   <FiUser className="text-[var(--accent)]" />
                   <span>{user?.name || "Learner"}</span>
@@ -138,7 +135,7 @@ const Navbar = () => {
                       
                       <Link
                         href="/profile"
-                        className="flex items-center gap-2 px-4 py-2 hover:bg-[var(--accent)]/10 transition"
+                        className="flex items-center gap-2 px-4 py-2 hover:bg-[var(--accent)]/30 transition"
                         onClick={() => setUserMenuOpen(false)}
                       >
                         <FiUser className="text-[var(--accent)]" />
@@ -147,7 +144,7 @@ const Navbar = () => {
                       
                       <Link
                         href="/settings"
-                        className="flex items-center gap-2 px-4 py-2 hover:bg-[var(--accent)]/10 transition"
+                        className="flex items-center gap-2 px-4 py-2 hover:bg-[var(--accent)]/30 transition"
                         onClick={() => setUserMenuOpen(false)}
                       >
                         <FiSettings className="text-[var(--accent)]" />
@@ -157,7 +154,7 @@ const Navbar = () => {
                       <div className="border-t border-[var(--border-color)] mt-2 pt-2">
                         <button
                           onClick={handleLogout}
-                          className="w-full flex items-center gap-2 px-4 py-2 text-red-500 hover:bg-red-500/10 transition"
+                          className="w-full flex items-center gap-2 px-4 py-2 text-red-500 hover:bg-red-500/30 transition"
                         >
                           <FiLogOut />
                           <span>Sign Out</span>
@@ -173,7 +170,7 @@ const Navbar = () => {
 
         {/* Mobile Menu Button */}
         <button
-          className="md:hidden text-3xl p-2 rounded-lg hover:bg-[var(--accent)]/10 transition"
+          className="md:hidden text-3xl p-2 rounded-lg hover:bg-[var(--accent)]/30 transition"
           style={{ color: "var(--foreground)" }}
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle menu"
@@ -197,7 +194,7 @@ const Navbar = () => {
               <Link
                 key={link}
                 href={`/${link.toLowerCase()}`}
-                className="block px-4 py-3 rounded-lg hover:bg-[var(--accent)]/10 transition font-medium"
+                className="block px-4 py-3 rounded-lg hover:bg-[var(--accent)]/30 transition font-medium"
                 onClick={() => setMenuOpen(false)}
               >
                 {link}
@@ -209,7 +206,7 @@ const Navbar = () => {
               {/* Theme Toggle */}
               <button
                 onClick={toggleTheme}
-                className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-lg border border-[var(--accent)] hover:bg-[var(--accent)]/10 transition"
+                className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-lg border border-[var(--accent)] hover:bg-[var(--accent)]/30 transition"
               >
                 {isDark ? <FiSun /> : <FiMoon />}
                 <span>Switch to {isDark ? "Light" : "Dark"} Mode</span>
@@ -228,7 +225,7 @@ const Navbar = () => {
                 </motion.button>
               ) : (
                 <div className="space-y-2">
-                  <div className="px-4 py-2 rounded-lg bg-[var(--accent)]/10">
+                  <div className="px-4 py-2 rounded-lg bg-[var(--accent)]/30">
                     <p className="font-semibold text-[var(--foreground)] flex items-center gap-2">
                       <FiUser /> {user?.name || "Learner"}
                     </p>
@@ -238,14 +235,14 @@ const Navbar = () => {
                   <div className="grid grid-cols-2 gap-2">
                     <Link
                       href="/profile"
-                      className="px-3 py-2 rounded-lg border border-[var(--accent)] hover:bg-[var(--accent)]/10 transition text-center"
+                      className="px-3 py-2 rounded-lg border border-[var(--accent)] hover:bg-[var(--accent)]/30 transition text-center"
                       onClick={() => setMenuOpen(false)}
                     >
                       Profile
                     </Link>
                     <button
                       onClick={handleLogout}
-                      className="px-3 py-2 rounded-lg border border-red-500 text-red-500 hover:bg-red-500/10 transition"
+                      className="px-3 py-2 rounded-lg border border-red-500 text-red-500 hover:bg-red-500/30 transition"
                     >
                       Sign Out
                     </button>
