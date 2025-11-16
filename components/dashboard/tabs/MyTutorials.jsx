@@ -101,8 +101,7 @@ export default function MyTutorials({ setActiveTab }) {
             {/* Tutorials Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
                 {dummyTutorials.map((tutorial) => (
-                    <Link
-                        href={ `/u/manage/${tutorial.id}` }
+                    <div
                         key={tutorial.id}
                         className="bg-[var(--card-bg)] relative border border-[var(--border-color)] rounded-2xl shadow-sm hover:shadow-2xl transition-all duration-300 overflow-hidden flex flex-col group hover:border-[var(--accent)]/30"
                     >
@@ -174,9 +173,9 @@ export default function MyTutorials({ setActiveTab }) {
 
                             {/* Footer Actions */}
                             <div className="flex justify-between items-center mt-6 pt-4 border-t border-[var(--border-color)]">
-                                <button className="px-4 py-2 rounded-lg bg-gradient-to-r from-[var(--accent)] to-purple-600 text-white text-sm font-medium hover:shadow-lg transition-all hover:scale-105">
+                                <Link href={`/u/manage/${tutorial.id}`} className="px-4 py-2 rounded-lg bg-gradient-to-r from-[var(--accent)] to-purple-600 text-white text-sm font-medium hover:shadow-lg transition-all hover:scale-105">
                                     Manage Content
-                                </button>
+                                </Link>
 
                                 {/* Always Visible Menu Button for Mobile */}
                                 <div className="lg:hidden relative" ref={menuRef}>
@@ -201,7 +200,7 @@ export default function MyTutorials({ setActiveTab }) {
                                 <MenuItem danger icon={<FaTrash />} text="Delete Tutorial" />
                             </div>
                         )}
-                    </Link>
+                    </div>
                 ))}
             </div>
 
