@@ -1,52 +1,28 @@
 "use client";
 import React, { useState } from 'react';
-
 import {
-    Plus,
-    Upload,
-    YoutubeLogo,
-    Link,
-    Tag,
-    CurrencyDollar,
-    Globe,
-    Lock,
-    Calendar,
-    Clock,
-    Play,
-    X,
-    CaretDown,
-    Check,
-    Pencil,
-    Trash,
-    FileText,
-    VideoCamera,
-    Question,
-    CaretUp
-} from "phosphor-react";
-
-// Aliases (keep your old Fa* names)
-export const FaPlus = Plus;
-export const FaUpload = Upload;
-export const FaYoutube = YoutubeLogo;
-export const FaLink = Link;
-export const FaTag = Tag;
-export const FaDollarSign = CurrencyDollar;
-export const FaGlobe = Globe;
-export const FaLock = Lock;
-export const FaCalendar = Calendar;
-export const FaClock = Clock;
-export const FaPlay = Play;
-export const FaTimes = X;
-export const FaChevronDown = CaretDown; // replaced
-export const FaCheck = Check;
-export const FaEdit = Pencil;
-export const FaTrash = Trash;
-export const FaFileText = FileText;
-export const FaVideo = VideoCamera;
-export const FaQuestionCircle = Question;
-export const FaArrowUp = CaretUp;   // replaced
-export const FaArrowDown = CaretDown; // replaced
-
+    FaPlus,
+    FaUpload,
+    FaYoutube,
+    FaLink,
+    FaTag,
+    FaDollarSign,
+    FaGlobe,
+    FaLock,
+    FaCalendar,
+    FaClock,
+    FaPlay,
+    FaTimes,
+    FaChevronDown,
+    FaCheck,
+    FaEdit,
+    FaTrash,
+    FaFile,
+    FaVideo,
+    FaQuestionCircle,
+    FaArrowUp,
+    FaArrowDown
+} from "react-icons/fa";
 
 
 const CreateTutorial = ({ setActiveTab }) => {
@@ -318,8 +294,8 @@ const CreateTutorial = ({ setActiveTab }) => {
                                             type="button"
                                             onClick={() => handleInputChange('difficulty', diff.value)}
                                             className={`flex-1 px-4 py-3 rounded-xl border transition-all ${formData.difficulty === diff.value
-                                                    ? `${diff.color} text-white border-transparent`
-                                                    : 'bg-[var(--card-bg)] border-[var(--border-color)] hover:border-[var(--accent)]'
+                                                ? `${diff.color} text-white border-transparent`
+                                                : 'bg-[var(--card-bg)] border-[var(--border-color)] hover:border-[var(--accent)]'
                                                 }`}
                                         >
                                             {diff.label}
@@ -339,7 +315,7 @@ const CreateTutorial = ({ setActiveTab }) => {
                                         onClick={() => addLesson('text')}
                                         className="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
                                     >
-                                        <FaFileText />
+                                        <FaFile />
                                         Add Text Lesson
                                     </button>
                                     <button
@@ -374,7 +350,7 @@ const CreateTutorial = ({ setActiveTab }) => {
 
                             {formData.lessons.length === 0 && (
                                 <div className="text-center py-8 border-2 border-dashed border-[var(--border-color)] rounded-xl">
-                                    <FaFileText className="text-3xl text-[var(--accent)] mx-auto mb-3" />
+                                    <FaFile className="text-3xl text-[var(--accent)] mx-auto mb-3" />
                                     <p className="text-sm opacity-70">No lessons added yet. Start by adding your first lesson.</p>
                                 </div>
                             )}
@@ -504,8 +480,8 @@ const CreateTutorial = ({ setActiveTab }) => {
                                             type="button"
                                             onClick={() => handleInputChange('visibility', visibility.value)}
                                             className={`flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-xl border transition-all ${formData.visibility === visibility.value
-                                                    ? 'border-[var(--accent)] bg-[var(--accent)]/10 text-[var(--accent)]'
-                                                    : 'border-[var(--border-color)] bg-[var(--card-bg)] hover:border-[var(--accent)]/50'
+                                                ? 'border-[var(--accent)] bg-[var(--accent)]/10 text-[var(--accent)]'
+                                                : 'border-[var(--border-color)] bg-[var(--card-bg)] hover:border-[var(--accent)]/50'
                                                 }`}
                                         >
                                             <Icon />
@@ -658,8 +634,8 @@ const CreateTutorial = ({ setActiveTab }) => {
                         <React.Fragment key={step.number}>
                             <div className="flex flex-col items-center flex-1">
                                 <div className={`w-12 h-12 rounded-full flex items-center justify-center border-2 transition-all ${currentStep >= step.number
-                                        ? 'bg-[var(--accent)] border-[var(--accent)] text-white'
-                                        : 'border-[var(--border-color)] bg-[var(--card-bg)]'
+                                    ? 'bg-[var(--accent)] border-[var(--accent)] text-white'
+                                    : 'border-[var(--border-color)] bg-[var(--card-bg)]'
                                     }`}>
                                     {currentStep > step.number ? <FaCheck /> : step.number}
                                 </div>
@@ -691,8 +667,8 @@ const CreateTutorial = ({ setActiveTab }) => {
                             onClick={prevStep}
                             disabled={currentStep === 1}
                             className={`px-6 py-3 rounded-xl border transition-all ${currentStep === 1
-                                    ? 'border-[var(--border-color)] text-opacity-50 cursor-not-allowed'
-                                    : 'border-[var(--border-color)] hover:border-[var(--accent)] hover:text-[var(--accent)]'
+                                ? 'border-[var(--border-color)] text-opacity-50 cursor-not-allowed'
+                                : 'border-[var(--border-color)] hover:border-[var(--accent)] hover:text-[var(--accent)]'
                                 }`}
                         >
                             Previous

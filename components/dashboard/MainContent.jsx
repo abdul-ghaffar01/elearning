@@ -3,10 +3,10 @@ import { useEffect } from "react";
 import EnrolledTutorials from "./tabs/EnrolledTutorials";
 import AllTutorials from "./tabs/AllTutorials";
 import Profile from "./tabs/Profile";
-import MyTutorials from "./tabs/MyTutorials";
-import CreateTutorial from "./tabs/CreateTutorial";
+import MyTutorials from "./tabs/my-tutorials/MyTutorials";
+import CreateTutorial from "./tabs/create-tutorial/CreateTutorial";
 import Students from "./tabs/Students";
-import Analytics from "./tabs/Analytics";
+import Analytics from "./tabs/analytics/Analytics";
 import Certificates from "./tabs/Certificates";
 
 export default function MainContent({ activeTab, setActiveTab, role }) {
