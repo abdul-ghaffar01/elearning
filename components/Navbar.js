@@ -120,13 +120,15 @@ const Navbar = () => {
 
         {/* Desktop Links */}
         <div className="hidden md:flex items-center space-x-4">
-          {["Home", "Tutorials", "About"].map((link) => (
+          {[{ name: "Home", path: "/" },
+          { name: "Tutorials", path: "tutorials" },
+          { name: "About", path: "about" }].map((link, index) => (
             <Link
-              key={link}
-              href={`/${link.toLowerCase()}`}
+              key={index}
+              href={link.path}
               className="hover-glow transition font-medium px-3 py-2 rounded-lg hover:bg-[var(--accent)]/30"
             >
-              {link}
+              {link.name}
             </Link>
           ))}
 
@@ -163,8 +165,8 @@ const Navbar = () => {
                   <FiUser className="text-[var(--accent)]" />
                   <span>{user?.name || "Learner"}</span>
                   <span className={`text-xs px-2 py-1 rounded-full ${user?.role === 'instructor'
-                      ? 'bg-purple-500/20 text-purple-500'
-                      : 'bg-blue-500/20 text-blue-500'
+                    ? 'bg-purple-500/20 text-purple-500'
+                    : 'bg-blue-500/20 text-blue-500'
                     }`}>
                     {user?.role}
                   </span>
@@ -186,8 +188,8 @@ const Navbar = () => {
                         <div className="flex items-center justify-between mt-1">
                           <span className="text-xs text-[var(--accent)] capitalize">{user?.role}</span>
                           <span className={`text-xs px-2 py-1 rounded-full ${user?.role === 'instructor'
-                              ? 'bg-purple-500/20 text-purple-500'
-                              : 'bg-blue-500/20 text-blue-500'
+                            ? 'bg-purple-500/20 text-purple-500'
+                            : 'bg-blue-500/20 text-blue-500'
                             }`}>
                             {user?.role === 'instructor' ? 'Educator' : 'Learner'}
                           </span>
@@ -202,8 +204,8 @@ const Navbar = () => {
                             onClick={handleRoleSwitch}
                             disabled={isSwitchingRole}
                             className={`flex w-full items-center gap-2 px-3 py-2 rounded text-xs font-medium transition ${isSwitchingRole
-                                ? 'bg-gray-500/20 text-gray-500 cursor-not-allowed'
-                                : 'bg-[var(--accent)]/20 text-[var(--accent)] hover:bg-[var(--accent)]/30'
+                              ? 'bg-gray-500/20 text-gray-500 cursor-not-allowed'
+                              : 'bg-[var(--accent)]/20 text-[var(--accent)] hover:bg-[var(--accent)]/30'
                               }`}
                           >
                             {isSwitchingRole ? (
@@ -319,8 +321,8 @@ const Navbar = () => {
                     onClick={handleRoleSwitch}
                     disabled={isSwitchingRole}
                     className={`w-full flex items-center justify-center gap-2 px-4 py-3 rounded-lg border transition ${isSwitchingRole
-                        ? 'border-gray-500 text-gray-500 cursor-not-allowed'
-                        : 'border-[var(--accent)] text-[var(--accent)] hover:bg-[var(--accent)]/30'
+                      ? 'border-gray-500 text-gray-500 cursor-not-allowed'
+                      : 'border-[var(--accent)] text-[var(--accent)] hover:bg-[var(--accent)]/30'
                       }`}
                   >
                     {isSwitchingRole ? (
