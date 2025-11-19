@@ -121,8 +121,8 @@ const Navbar = () => {
         {/* Desktop Links */}
         <div className="hidden md:flex items-center space-x-4">
           {[{ name: "Home", path: "/" },
-          { name: "Tutorials", path: "tutorials" },
-          { name: "About", path: "about" }].map((link, index) => (
+          { name: "Tutorials", path: "/tutorials" },
+          { name: "About", path: "/about" }].map((link, index) => (
             <Link
               key={index}
               href={link.path}
