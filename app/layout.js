@@ -2,6 +2,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 
 export const metadata = {
+
   title: "eLearn Platform | Learn Anything, Anytime",
   description:
     "A modern e-learning platform built with Next.js, Tailwind CSS, and Framer Motion. Explore tutorials and enhance your skills for free.",
@@ -24,6 +25,9 @@ export const metadata = {
     ],
     locale: "en_US",
     type: "website",
+  },
+  icons: {
+    icon: "/favicon.ico",
   },
   twitter: {
     card: "summary_large_image",
