@@ -18,6 +18,9 @@ const Page = () => {
       if (accessToken) {
         console.log('Access token received:', accessToken)
         
+        // updating accessToken in localStorage
+        localStorage.setItem('accessToken', accessToken)
+        
         // Update the user in Zustand with the token
         updateUser({
           accessToken: accessToken,
@@ -27,9 +30,9 @@ const Page = () => {
         const newUrl = window.location.pathname
         window.history.replaceState({}, '', newUrl)
         
-        // Redirect to home or dashboard
         fetchUserData(accessToken) // Optionally fetch user data
-        router.push('/u/dashboard') // or '/'
+        // Redirect to dashboard
+        router.push('/u/dashboard')
       } else {
         console.log('No access token found in URL')
         router.push('/login') // Redirect to login on failure

@@ -1,52 +1,72 @@
+// store/loginStore.js
 import { create } from "zustand";
 import { persist } from 'zustand/middleware';
+import { TokenService } from '@/utils/tokenUtils';
 
 export const useUserStore = create(
-  persist(
-    (set) => ({
-      isLoggedIn: false, // Changed to false initially
-      user: null,
-      accessToken: undefined,
+    persist(
+        (set, get) => ({
+            isLoggedIn: false,
+            user: null,
+            accessToken: null,
 
-      login: (user, token) => set({ 
-        isLoggedIn: true, 
-        user,
-        accessToken: token 
-      }),
-      
-      logout: () => set({ 
-        isLoggedIn: false, 
-        user: null,
-        accessToken: undefined 
-      }),
+            login: (user, token) => {
+                if (token) {
+                    localStorage.setItem('accessToken', token);
+                }
+                set({ isLoggedIn: true, user, accessToken: token });
+            },
+            
+            logout: () => {
+                TokenService.clearTokens();
+                set({ isLoggedIn: false, user: null, accessToken: null });
+            },
 
-      updateUser: (updatedUserData) => set((state) => ({
-        user: state.user ? {
-          ...state.user,
-          ...updatedUserData
-        } : null
-      })),
+            // Check and validate token
+            validateToken: async () => {
+                const { accessToken } = get();
+                if (!accessToken) return false;
+                
+                const isValid = await TokenService.isAccessTokenValid(accessToken);
+                
+                if (!isValid) {
+                    try {
+                        const newToken = await TokenService.refreshAccessToken();
+                        set({ accessToken: newToken });
+                        return true;
+                    } catch (error) {
+                        get().logout();
+                        return false;
+                    }
+                }
+                
+                return true;
+            },
 
-      switchRole: (newRole) => set((state) => ({
-        user: state.user ? {
-          ...state.user,
-          role: newRole
-        } : null
-      })),
+            setAccessToken: (token) => {
+                if (token) {
+                    localStorage.setItem('accessToken', token);
+                }
+                set({ accessToken: token });
+            },
 
-      setUser: (userData) => set({ user: userData }),
-      
-      setAccessToken: (token) => set({ accessToken: token }),
-    }),
-    {
-      name: 'user-storage',
-      // Optional: exclude sensitive data from persistence
-      partialize: (state) => ({
-        isLoggedIn: state.isLoggedIn,
-        user: state.user,
-        // Don't persist token if you want more security
-        // accessToken: state.accessToken
-      })
-    }
-  )
-)
+            updateUser: (updatedUserData) => set((state) => ({
+                user: state.user ? {
+                    ...state.user,
+                    ...updatedUserData
+                } : null
+            })),
+
+            setUser: (userData) => set({ user: userData }),
+        }),
+        {
+            name: 'user-storage',
+            // Don't store access token in persisted state for security
+            partialize: (state) => ({
+                isLoggedIn: state.isLoggedIn,
+                user: state.user,
+                // accessToken is NOT persisted, will be loaded from localStorage
+            })
+        }
+    )
+);
