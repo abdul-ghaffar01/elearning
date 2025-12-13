@@ -2,67 +2,51 @@ import { create } from "zustand";
 import { persist } from 'zustand/middleware';
 
 export const useUserStore = create(
-    persist(
-        (set, get) => ({
-            isLoggedIn: true,
-            user: {
-                name: "John Doe",
-                email: "john.doe@example.com",
-                avatar: "/default-avatar.png",
-                role: "instructor", // or "student"
-                enrolledTutorials: [
-                    {
-                        id: 1,
-                        title: "Introduction to Databases",
-                        totalLessons: 4,
-                        completedLessons: 4,
-                    },
-                    {
-                        id: 2,
-                        title: "Advanced SQL Queries",
-                        totalLessons: 6,
-                        completedLessons: 3,
-                    },
-                    {
-                        id: 3,
-                        title: "NoSQL Databases",
-                        totalLessons: 5,
-                        completedLessons: 2,
-                    },
-                ],
-                completedTutorials: [
-                    {
-                        id: 1,
-                        title: "Introduction to Databases",
-                    },
-                ],
-                totalEnrolled: 6,
-            },
+  persist(
+    (set) => ({
+      isLoggedIn: false, // Changed to false initially
+      user: null,
+      accessToken: undefined,
 
-            login: (user) => set({ isLoggedIn: true, user }),
-            logout: () => set({ isLoggedIn: false, user: null }),
+      login: (user, token) => set({ 
+        isLoggedIn: true, 
+        user,
+        accessToken: token 
+      }),
+      
+      logout: () => set({ 
+        isLoggedIn: false, 
+        user: null,
+        accessToken: undefined 
+      }),
 
-            // Update user with new data (for role switching)
-            updateUser: (updatedUserData) => set((state) => ({
-                user: {
-                    ...state.user,
-                    ...updatedUserData
-                }
-            })),
+      updateUser: (updatedUserData) => set((state) => ({
+        user: state.user ? {
+          ...state.user,
+          ...updatedUserData
+        } : null
+      })),
 
-            // Switch role function that updates the user
-            switchRole: (newRole) => set((state) => ({
-                user: {
-                    ...state.user,
-                    role: newRole
-                }
-            })),
+      switchRole: (newRole) => set((state) => ({
+        user: state.user ? {
+          ...state.user,
+          role: newRole
+        } : null
+      })),
 
-            // Optional: Complete user replacement (for backend responses)
-            setUser: (userData) => set({ user: userData }),
-        }),
-        {
-            name: 'user-storage', // name for the persisted data
-        }
-    )
-);
+      setUser: (userData) => set({ user: userData }),
+      
+      setAccessToken: (token) => set({ accessToken: token }),
+    }),
+    {
+      name: 'user-storage',
+      // Optional: exclude sensitive data from persistence
+      partialize: (state) => ({
+        isLoggedIn: state.isLoggedIn,
+        user: state.user,
+        // Don't persist token if you want more security
+        // accessToken: state.accessToken
+      })
+    }
+  )
+)
