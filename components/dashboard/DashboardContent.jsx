@@ -1,5 +1,5 @@
 "use client";
-import { Suspense, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Sidebar from "./Sidebar";
 import MainContent from "./MainContent";
 import { useUserStore } from "@/store/loginStore";

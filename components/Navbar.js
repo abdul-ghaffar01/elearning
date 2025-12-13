@@ -225,12 +225,12 @@ const Navbar = () => {
 
                       {/* Navigation Links */}
                       <Link
-                        href="/u/dashboard?tab=profile"
+                        href="/u/dashboard"
                         className="flex items-center gap-2 px-4 py-2 hover:bg-[var(--accent)]/30 transition"
                         onClick={() => setUserMenuOpen(false)}
                       >
                         <FiUser className="text-[var(--accent)]" />
-                        <span>Profile</span>
+                        <span>Dashboard</span>
                       </Link>
 
                       {/* Sign Out */}
