@@ -47,7 +47,7 @@ export const useUserStore = create(
                 if (token) {
                     localStorage.setItem('accessToken', token);
                 }
-                set({ accessToken: token });
+                set({ accessToken: token, isLoggedIn: true });
             },
 
             updateUser: (updatedUserData) => set((state) => ({
@@ -63,7 +63,6 @@ export const useUserStore = create(
             name: 'user-storage',
             // Don't store access token in persisted state for security
             partialize: (state) => ({
-                isLoggedIn: state.isLoggedIn,
                 user: state.user,
                 // accessToken is NOT persisted, will be loaded from localStorage
             })

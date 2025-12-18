@@ -44,7 +44,6 @@ const ProtectedRoute = ({ children }) => {
             try {
                 const newAccessToken = await TokenService.refreshAccessToken();
                 setAccessToken(newAccessToken);
-                localStorage.setItem('accessToken', newAccessToken);
                 setIsCheckingAuth(false);
             } catch (error) {
                 // Refresh failed, clear tokens and redirect

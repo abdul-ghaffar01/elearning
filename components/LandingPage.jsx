@@ -259,22 +259,13 @@ export default function LandingPage() {
 
           {!isLoggedIn ? (
             <motion.div variants={fadeUp(0.7)} className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <motion.button
-                whileHover={{ 
-                  scale: 1.05, 
-                  boxShadow: "0 20px 40px rgba(139, 92, 246, 0.3)" 
-                }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => login({ 
-                  name: "Demo User", 
-                  email: "demo@example.com",
-                  role: "student" 
-                })}
+              <Link
+                href="/tutorials"
                 className="px-8 py-4 rounded-xl font-semibold text-white shadow-lg flex items-center gap-3 bg-gradient-to-r from-accent to-accent-hover hover:from-accent-hover hover:to-accent transition-all"
               >
                 <FaPlay className="text-sm" />
                 Start Learning Free
-              </motion.button>
+              </Link>
               
               <motion.button
                 whileHover={{ scale: 1.05 }}

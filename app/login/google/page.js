@@ -7,6 +7,7 @@ import { useUserStore } from '@/store/loginStore'
 const Page = () => {
   const router = useRouter()
   const { setUser, updateUser } = useUserStore()
+  const { setAccessToken } = useUserStore()
 
   useEffect(() => {
     // Function to extract access token from URL
@@ -18,14 +19,7 @@ const Page = () => {
       if (accessToken) {
         console.log('Access token received:', accessToken)
         
-        // updating accessToken in localStorage
-        localStorage.setItem('accessToken', accessToken)
-        
-        // Update the user in Zustand with the token
-        updateUser({
-          accessToken: accessToken,
-        })
-        
+        setAccessToken(accessToken)
         // Clear the token from URL for security
         const newUrl = window.location.pathname
         window.history.replaceState({}, '', newUrl)
