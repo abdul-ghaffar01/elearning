@@ -43,10 +43,10 @@ export default function AuthPage() {
 
           <div className="relative my-6">
             <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-[var(--border)]"></div>
+              <hr className="w-full bg-[var(--border-color)]"></hr>
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="px-4 bg-[var(--background)] text-[var(--muted)]">
+              <span className="px-4 bg-[var(--card-bg)] text-[var(--muted)]">
                 Or continue with
               </span>
             </div>

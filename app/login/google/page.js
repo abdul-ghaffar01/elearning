@@ -39,12 +39,13 @@ const Page = () => {
   // If you want to handle the API call to get user data with the token:
   const fetchUserData = async (token) => {
     try {
-      const response = await fetch('/api/auth/verify-google-token', {
+      const response = await fetch(NEXT_PUBLIC_BACKEND_BASE_URL+"/user", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
         },
-        body: JSON.stringify({ token }),
+        credentials: 'include'
       })
       
       if (response.ok) {
