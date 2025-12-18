@@ -39,7 +39,7 @@ const Page = () => {
   // If you want to handle the API call to get user data with the token:
   const fetchUserData = async (token) => {
     try {
-      const response = await fetch(NEXT_PUBLIC_BACKEND_BASE_URL+"/user", {
+      const response = await fetch(process.env.NEXT_PUBLIC_BACKEND_BASE_URL+"/user", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
