@@ -80,7 +80,6 @@ function GoogleLoginButton() {
     try {
       // Simulate Google OAuth flow
       router.push(`${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/google-login`);
-      console.log("Google login successful:", data);
       
       // For demo - redirect to role selection
       router.push("/u/profile-setup");
