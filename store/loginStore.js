@@ -7,7 +7,12 @@ export const useUserStore = create(
     persist(
         (set, get) => ({
             isLoggedIn: false,
-            user: null,
+            user: {
+                id: null,
+                name: null,
+                email: null,
+                role: "student",
+            },
             accessToken: null,
 
             login: (user, token) => {
