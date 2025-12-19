@@ -71,7 +71,8 @@ export const useUserStore = create(
             name: 'user-storage',
             // Don't store access token in persisted state for security
             partialize: (state) => ({
-                user: state.user,
+                user: state.user ? { ...state.user, role: state.user.role || "student" }
+        : { id: null, name: null, email: null, role: "student" },
                 // accessToken is NOT persisted, will be loaded from localStorage
             })
         }
