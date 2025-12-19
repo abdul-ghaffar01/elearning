@@ -40,7 +40,7 @@ const Page = () => {
   const fetchUserData = async (token) => {
     try {
       const response = await fetch(process.env.NEXT_PUBLIC_BACKEND_BASE_URL+"/user", {
-        method: 'POST',
+        method: 'GET',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`,
