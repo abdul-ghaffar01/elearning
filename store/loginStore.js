@@ -21,7 +21,7 @@ export const useUserStore = create(
                 }
                 set({ isLoggedIn: true, user, accessToken: token });
             },
-            
+
             logout: () => {
                 TokenService.clearTokens();
                 set({ isLoggedIn: false, user: null, accessToken: null });
@@ -31,9 +31,9 @@ export const useUserStore = create(
             validateToken: async () => {
                 const { accessToken } = get();
                 if (!accessToken) return false;
-                
+
                 const isValid = await TokenService.isAccessTokenValid(accessToken);
-                
+
                 if (!isValid) {
                     try {
                         const newToken = await TokenService.refreshAccessToken();
@@ -44,7 +44,7 @@ export const useUserStore = create(
                         return false;
                     }
                 }
-                
+
                 return true;
             },
 
@@ -60,6 +60,9 @@ export const useUserStore = create(
                     ...state.user,
                     ...updatedUserData
                 } : null
+            })),
+            switchRole: (newRole) => set((state) => ({
+                user: state.user ? { ...state.user, role: newRole } : null
             })),
 
             setUser: (userData) => set({ user: userData }),
